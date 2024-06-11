@@ -18,6 +18,19 @@ const connection = mysql.createConnection({
   multipleStatements: true,
 });
 
+(async function connectToDatabase(dbConnection) {
+  return new Promise((resolve, reject) => {
+    dbConnection.connect((error) => {
+      if (error) {
+        reject(new Error(ERROR_CODES.MYSQL_CONNECT_ERROR));
+      } else {
+        console.log("✨✨ Connected to MySQL");
+        resolve();
+      }
+    });
+  });
+})(connection);
+
 RoutesBoot(app, connection);
 
 app.listen(port, () => {
