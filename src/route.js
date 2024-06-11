@@ -29,6 +29,9 @@ async function deleteFile(path) {
 }
 
 function bootRoutes(app, db) {
+  app.get("/", (req, res) => {
+    res.send("Hello World! I am your new NodeJS app!");
+  });
   app.post("/", upload.single("zipFile"), async (req, res) => {
     try {
       console.log("✨✨ Request received");
